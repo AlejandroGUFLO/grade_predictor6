@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 # ------------------------------
 @st.cache_data
 def load_and_prepare_data():
-    df = pd.read_csv("proyectom.csv")
+    df = pd.read_excel("proyectom.xlsx")
     
     # Target variables
     df["HighPerformance"] = (df["Calificaciones pasadas"] >= 9.2).astype(int)
