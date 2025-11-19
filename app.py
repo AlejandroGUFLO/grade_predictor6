@@ -267,7 +267,7 @@ if st.button("🔮 Predecir Rendimiento", type="primary"):
         st.write(f"• ⏰ Aumentar {2-3} horas de estudio semanales podría ser suficiente")
         st.write("• 📖 Enfócate en técnicas de estudio más efectivas")
     
-    # Simulador
+    # Simulador - Sin gráfica
     st.markdown("---")
     st.subheader("🔄 Simulador: Impacto de las Horas de Estudio")
     
@@ -303,44 +303,6 @@ if st.button("🔮 Predecir Rendimiento", type="primary"):
         hours_scenarios.append(h)
         grades_scenarios.append(sim_grade)
         probs_scenarios.append(sim_prob * 100)
-    
-    fig2 = go.Figure()
-    
-    # Calificación esperada
-    fig2.add_trace(go.Scatter(
-        x=hours_scenarios,
-        y=grades_scenarios,
-        mode='lines+markers',
-        name='Calificación esperada',
-        line=dict(color='steelblue', width=3),
-        marker=dict(size=6),
-        yaxis='y1'
-    ))
-    
-    # Marcar el punto actual
-    fig2.add_trace(go.Scatter(
-        x=[hours_now],
-        y=[predicted_grade],
-        mode='markers',
-        name='Tu situación actual',
-        marker=dict(size=15, color='red', symbol='star'),
-        yaxis='y1'
-    ))
-    
-    # Línea de referencia en 9.2
-    fig2.add_hline(y=9.2, line_dash="dash", line_color="green", 
-                   annotation_text="Alto rendimiento (9.2)", yref='y1')
-    
-    fig2.update_layout(
-        title="¿Cómo afectan las horas de estudio a tu calificación?",
-        xaxis_title="Horas de estudio semanales",
-        yaxis_title="Calificación esperada",
-        yaxis=dict(range=[6, 10]),
-        height=400,
-        hovermode='x unified'
-    )
-    
-    st.plotly_chart(fig2, use_container_width=True)
     
     # Encontrar horas óptimas
     optimal_hours = hours_scenarios[grades_scenarios.index(max(grades_scenarios))]
